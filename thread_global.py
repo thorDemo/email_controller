@@ -27,6 +27,10 @@ for email in file:
     if temp % 98 == 0:
         # 随机切换账号
         while True:
+            service.socket_close()
+            service = SMTPSocket(log)
+            service.debuglevel = 1
+            service.socket_connect()
             sender, password = rand_account()
             service.username = sender
             service.password = password
