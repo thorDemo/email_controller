@@ -25,8 +25,7 @@ file = open('target/1.txt', 'r', encoding='utf-8')
 temp = 1
 for email in file:
     receivers.append(email.strip())
-    if temp % 10000 == 0:
-        # 随机切换账号
+    if temp % 49 == 0:
         while True:
             service.socket_close()
             service = SMTPSocket(log)
@@ -38,8 +37,7 @@ for email in file:
             c, m = service.auth_user()
             if c != 535:
                 break
-    if temp % 49 == 0:
-        receivers.append('thorhx@gmail.com')
+        receivers.append('914081010@qq.com')
         content = open('templates/type_2.html', encoding='utf-8')
         message = MIMEText(content.read(), _subtype='html', _charset='utf-8')
         content.close()
@@ -54,5 +52,5 @@ for email in file:
         message['Return-Path'] = sender
         service.send_mail(sender, receivers, message.as_bytes())
         receivers = []
-        time.sleep(50)
+        time.sleep(240)
     temp += 1
