@@ -1,10 +1,11 @@
-from mylib.long_connect import SMTPSocket, SMTPAuthenticationError
+from mylib.long_connect import SMTPSocket
 from email.mime.text import MIMEText
 from email.header import Header
 from mylib.code_logging import Logger as Log
 from mylib.coder import encode_header
 from mylib.tools import rand_from, rand_to, rand_title, rand_account
 import uuid
+import time
 
 log = Log('send_email.log').get_log()
 
@@ -24,7 +25,7 @@ file = open('target/1.txt', 'r', encoding='utf-8')
 temp = 1
 for email in file:
     receivers.append(email.strip())
-    if temp % 98 == 0:
+    if temp % 10000 == 0:
         # 随机切换账号
         while True:
             service.socket_close()
@@ -53,4 +54,5 @@ for email in file:
         message['Return-Path'] = sender
         service.send_mail(sender, receivers, message.as_bytes())
         receivers = []
+        time.sleep(20)
     temp += 1
