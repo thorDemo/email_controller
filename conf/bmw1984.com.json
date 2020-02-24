@@ -3,10 +3,10 @@
   "uid": "66481",
   "domain": "bmw1984.com",
   "service": "23.88.229.183",
-  "return_box": "914081010@qq.com",
+  "return_box": "168035493@qq.com",
   "return_delay": 50,
   "dkim_key": "key/bmw1984.com.pem",
   "dkim_selector": "s1",
   "target": "target/500-1.txt",
-  "delay": 40
+  "delay": 5
 }

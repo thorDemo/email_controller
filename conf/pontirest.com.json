@@ -1,0 +1,12 @@
+{
+  "api": "CfVux6n9Zy9ruVmm",
+  "uid": "66481",
+  "domain": "pontirest.com",
+  "service": "23.88.229.127",
+  "return_box": "914081010@qq.com",
+  "return_delay": 50,
+  "dkim_key": "key/pontirest.com.pem",
+  "dkim_selector": "s1",
+  "target": "target/500-1.txt",
+  "delay": 5
+}

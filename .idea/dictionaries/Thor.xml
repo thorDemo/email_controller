@@ -1,8 +1,16 @@
 <component name="ProjectDictionaryState">
   <dictionary name="Thor">
     <words>
+      <w>crlf</w>
       <w>dkim</w>
+      <w>ehlo</w>
+      <w>helo</w>
+      <w>maxline</w>
+      <w>ptyw</w>
+      <w>pyri</w>
       <w>rsaky</w>
+      <w>smtp</w>
+      <w>sohu</w>
     </words>
   </dictionary>
 </component>
