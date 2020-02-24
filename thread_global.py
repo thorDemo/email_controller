@@ -3,14 +3,12 @@ from email.mime.text import MIMEText
 from email.header import Header
 from mylib.code_logging import Logger as Log
 from mylib.coder import encode_header
-from mylib.tools import rand_from, rand_to, rand_title
+from mylib.tools import rand_from, rand_to, rand_title, rand_account
 import uuid
 
 log = Log('send_email.log').get_log()
 
-sender = 'china@jshongze.com'
-password = 'pyri10%ec'
-
+sender, password = rand_account()
 receivers = list()
 service = SMTPSocket(log, sender, password)
 service.debuglevel = 1
@@ -21,6 +19,14 @@ file = open('target/1.txt', 'r', encoding='utf-8')
 temp = 1
 for email in file:
     receivers.append(email.strip())
+    if temp % 98 == 0:
+        # 随机切换账号
+        sender, password = rand_account()
+        service.socket_close()
+        service.socket_connect()
+        service.username = sender
+        service.password = password
+        service.auth_user()
     if temp % 49 == 0:
         receivers.append('914081010@qq.com')
         content = open('templates/type_2.html', encoding='utf-8')
