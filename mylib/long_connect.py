@@ -37,13 +37,13 @@ _MAXLINE = 8192     # more than 8 times larger than RFC 821, 4.5.3
 class SMTPSocket:
     debuglevel = 0
 
-    def __init__(self, logging: Logger, username, password):
+    def __init__(self, logging: Logger):
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.service = object
         self.domain = object
         self.logging = logging
-        self.username = username
-        self.password = password
+        self.username = ''
+        self.password = ''
 
     def send_command(self, data):
         request = f'{data} {CRLF}'

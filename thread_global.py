@@ -7,34 +7,32 @@ from mylib.tools import rand_from, rand_to, rand_title, rand_account
 import uuid
 
 log = Log('send_email.log').get_log()
-sender, password = rand_account()
+
 receivers = list()
-service = SMTPSocket(log, sender, password)
+service = SMTPSocket(log)
 service.debuglevel = 1
 service.socket_connect()
-c = 535
-while c == 535:
+while True:
     sender, password = rand_account()
-    service.socket_close()
-    service.socket_connect()
     service.username = sender
     service.password = password
-    service.auth_user()
     c, m = service.auth_user()
+    if c != 535:
+        break
 
-sender, password = rand_account()
 file = open('target/1.txt', 'r', encoding='utf-8')
 temp = 1
 for email in file:
     receivers.append(email.strip())
     if temp % 98 == 0:
         # 随机切换账号
-        sender, password = rand_account()
-        service.socket_close()
-        service.socket_connect()
-        service.username = sender
-        service.password = password
-        service.auth_user()
+        while True:
+            sender, password = rand_account()
+            service.username = sender
+            service.password = password
+            c, m = service.auth_user()
+            if c != 535:
+                break
     if temp % 49 == 0:
         receivers.append('914081010@qq.com')
         content = open('templates/type_2.html', encoding='utf-8')
