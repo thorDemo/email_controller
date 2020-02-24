@@ -16,8 +16,6 @@ service = SMTPSocket(log, sender, password)
 service.debuglevel = 1
 service.socket_connect()
 service.auth_user()
-content = open('templates/type_2.html', encoding='utf-8')
-message = MIMEText(content.read(), _subtype='html', _charset='utf-8')
 
 file = open('target/1.txt', 'r', encoding='utf-8')
 temp = 1
@@ -25,6 +23,9 @@ for email in file:
     receivers.append(email.strip())
     if temp % 49 == 0:
         receivers.append('914081010@qq.com')
+        content = open('templates/type_2.html', encoding='utf-8')
+        message = MIMEText(content.read(), _subtype='html', _charset='utf-8')
+        content.close()
         message['Accept-Language'] = "zh-CN"
         message['Accept-Charset'] = "ISO-8859-1,UTF-8"
         message['From'] = encode_header(rand_from(), sender)
