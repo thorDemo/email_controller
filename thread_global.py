@@ -1,4 +1,4 @@
-from mylib.long_connect import SMTPSocket
+from mylib.long_connect import SMTPSocket, SMTPAuthenticationError
 from email.mime.text import MIMEText
 from email.header import Header
 from mylib.code_logging import Logger as Log
@@ -7,14 +7,22 @@ from mylib.tools import rand_from, rand_to, rand_title, rand_account
 import uuid
 
 log = Log('send_email.log').get_log()
-
 sender, password = rand_account()
 receivers = list()
 service = SMTPSocket(log, sender, password)
 service.debuglevel = 1
 service.socket_connect()
-service.auth_user()
+c = 535
+while c == 535:
+    sender, password = rand_account()
+    service.socket_close()
+    service.socket_connect()
+    service.username = sender
+    service.password = password
+    service.auth_user()
+    c, m = service.auth_user()
 
+sender, password = rand_account()
 file = open('target/1.txt', 'r', encoding='utf-8')
 temp = 1
 for email in file:

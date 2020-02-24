@@ -24,6 +24,10 @@ class SMTPBlockedByRateLimit(SMTPException):
     """连接频率限制"""
 
 
+class SMTPAuthenticationError(SMTPException):
+    """连接频率限制"""
+
+
 SMTP_PORT = 25
 CRLF = "\r\n"
 bCRLF = b"\r\n"
@@ -85,8 +89,6 @@ class SMTPSocket:
         self.compile_send_command(f'AUTH LOGIN {username}')
         password = str(b64encode(bytes(self.password, encoding='utf-8')), 'utf-8')
         c, m = self.compile_send_command(password)
-        if c == 535:
-            raise SMTPReplyError(m)
         return c, m
 
     def mail_from(self, sender):
