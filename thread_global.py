@@ -39,7 +39,7 @@ for email in file:
             if c != 535:
                 break
     if temp % 49 == 0:
-        receivers.append('914081010@qq.com')
+        receivers.append('thorhx@gmail.com')
         content = open('templates/type_2.html', encoding='utf-8')
         message = MIMEText(content.read(), _subtype='html', _charset='utf-8')
         content.close()
@@ -54,5 +54,5 @@ for email in file:
         message['Return-Path'] = sender
         service.send_mail(sender, receivers, message.as_bytes())
         receivers = []
-        time.sleep(20)
+        time.sleep(50)
     temp += 1
