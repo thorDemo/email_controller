@@ -3,6 +3,8 @@
     <words>
       <w>crlf</w>
       <w>dkim</w>
+      <w>dkimpy</w>
+      <w>dnspython</w>
       <w>ehlo</w>
       <w>helo</w>
       <w>maxline</w>

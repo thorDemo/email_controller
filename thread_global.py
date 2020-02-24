@@ -23,7 +23,7 @@ file = open('target/1.txt', 'r', encoding='utf-8')
 temp = 1
 for email in file:
     receivers.append(email.strip())
-    if temp % 10 == 0:
+    if temp % 49 == 0:
         receivers.append('914081010@qq.com')
         message['Accept-Language'] = "zh-CN"
         message['Accept-Charset'] = "ISO-8859-1,UTF-8"
