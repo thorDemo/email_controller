@@ -1,5 +1,6 @@
 #! /usr/bin/env python3
 import socket
+import socks
 import dns.resolver
 from logging import Logger
 from base64 import b64encode
@@ -38,6 +39,8 @@ class SMTPSocket:
     debuglevel = 0
 
     def __init__(self, logging: Logger):
+        socks.set_default_proxy(socks.HTTP, "190.2.144.46", 18044)
+        socket.socket = socks.socksocket
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.service = object
         self.domain = object
@@ -86,7 +89,7 @@ class SMTPSocket:
         self.ehlo()
         self.logging.debug(f'> RANDOM ACCOUNT username:{self.username} password:{self.password}')
         username = str(b64encode(bytes(self.username, encoding='utf-8')), 'utf-8')
-        self.compile_send_command(f'AUTH LOGIN {username}')
+        c, m = self.compile_send_command(f'AUTH LOGIN {username}')
         password = str(b64encode(bytes(self.password, encoding='utf-8')), 'utf-8')
         c, m = self.compile_send_command(password)
         return c, m
