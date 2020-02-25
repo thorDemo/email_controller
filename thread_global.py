@@ -52,5 +52,5 @@ for email in file:
         message['Return-Path'] = sender
         service.send_mail(sender, receivers, message.as_bytes())
         receivers = []
-        time.sleep(240)
+        time.sleep(60)
     temp += 1
